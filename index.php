@@ -15,7 +15,7 @@
         #chat
         {
             height: 300px;
-            box-shadow: 0 0 5px inset #ddd;
+            overflow-y: scroll;
         }
         .item
         {
@@ -55,15 +55,18 @@ else
     exit("<div class='panel panel-danger'><div class='panel-heading'>Error!</div><div class='panel-body'>You Must <a href='sign.php'>Sign In First.</a> </div></div>");
 }
 ?>
-<div class="container well" style="margin-top: 60px;">
-    <h1>Welcome <?php echo $_COOKIE['name']; ?></h1>
-    <div id="chat">
+<h1>Welcome, <?php echo $_COOKIE['name']; ?></h1>
+<div id="chat" class="well container">
 
-    </div>
+</div>
+<br >
+<br/>
+<br/>
+<div class="well container">
     <input class="form-control" type="text" id="message" placeholder="Type in your message...">
     <input type="button" class="btn btn-primary" value="Send" onclick="send()">
 </div>
-<a href="logout.php" style="margin-left: 20%;"><button class="btn btn-lg btn-primary">Logout</button></a>
+<a href="logout.php" style="margin-left: 45%;"><button class="btn btn-lg btn-primary">Logout</button></a>
 <script>
     var message;
     var username = <?php echo '"' .$_COOKIE['name'] . '"'; ?>;
@@ -79,6 +82,8 @@ else
         $.get("log.html", function(data){$("#chat").html(data);});
     }
     setInterval(function() {$.get("log.html", function(data){$("#chat").html(data);})}, 2500);
+    setInterval(function() { $("#chat").scrollTop(1E10) }, 2520);
+
 </script>
 </body>
 </html>

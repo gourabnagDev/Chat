@@ -38,8 +38,11 @@ if(!isset($_COOKIE["name"]))
 </div>";
     if(isset($_GET['name']))
     {
+        $contents = file_get_contents("log.html");
+        $contents .= "<i>{$_GET['name']} joined the room.</i><Br />";
+        file_put_contents("log.html", $contents);
         setcookie("name", $_GET['name']);
-        header("Location: index.php?msg=Signed+in_successfully&msgType=success");
+        header("Location: index.php?msg=Signed+in+successfully&msgType=success");
     }
 }
 else

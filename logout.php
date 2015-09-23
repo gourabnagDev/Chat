@@ -18,6 +18,9 @@
 <?php
 if(isset($_COOKIE["name"]))
 {
+    $contents = file_get_contents("log.html");
+    $contents .= "<i>{$_COOKIE["name"]} left the room.</i><Br />";
+    file_put_contents("log.html", $contents);
     unset($_COOKIE["name"]);
     setcookie("name", null, time()-3600);
     echo "
