@@ -16,6 +16,7 @@
         {
             height: 300px;
             overflow-y: scroll;
+            overflow-x: hidden;
         }
         .item
         {
@@ -23,18 +24,28 @@
         }
         input[id="message"]
         {
-            width: 90%;
+            width: 80%;
         }
         input[value='Send']
         {
             margin-top: -38px;
-            margin-left: 92%;
+            margin-left: 82%;
         }
         .panel
         {
             width: 40%;
             margin-left: 30%;
             margin-top: 7%;
+        }
+        #emoctions
+        {
+            margin-top: -38px;
+            margin-left: 90%;
+        }
+        .emoction
+        {
+            font-size: 30px;
+            margin-left: 5px;
         }
     </style>
     <title>Chat</title>
@@ -45,7 +56,7 @@
 if(isset($_COOKIE["name"])) {
     if (isset($_GET['msg']) && isset($_GET['msgType'])) {
         echo "<div class='alert alert-dismissible alert-{$_GET['msgType']}'>
-<button type='button' class='close' data-dismiss='alert'>×</button>
+<button type='button' class='close' data-dismiss='alert'>&times;</button>
 {$_GET['msg']}
 </div>";
     }
@@ -65,12 +76,73 @@ else
 <div class="well container">
     <input class="form-control" type="text" id="message" placeholder="Type in your message...">
     <input type="button" class="btn btn-primary" value="Send" onclick="send()">
+    <button id="emoctions" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Emoctions</button>
+
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <a href="#" class="emoction" onclick="putEmoction('😀')">😀</a><a href="#" class="emoction" onclick="putEmoction('☹')">☹</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😂')">😂</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😃')">😃</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😅')">😅</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😆')">😆</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😇')">😇</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😈')">😈</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😊')">😊</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😎')">😎</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😘')">😘</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😛')">😛</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😟')">😟</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😤')">😤</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😮')">😮</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😩')">😩</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😪')">😪</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😫')">😫</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🙋')">🙋</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🙍')">🙍</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🙏')">🙏</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😤')">😤</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😴')">😴</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🙀')">🙀</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😳')">😳</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😱')">😱</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😷')">😷</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😭')">😭</a>
+                    <a href="#" class="emoction" onclick="putEmoction('😼')">😼</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🎔')">🎔</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🎈')">🎈</a>
+                    <a href="#" class="emoction" onclick="putEmoction('🍩')">🍩</a>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 </div>
 <a href="logout.php" style="margin-left: 45%;"><button class="btn btn-lg btn-primary">Logout</button></a>
 <div id="sound">
 
 </div>
 <script>
+    function putEmoction(emoction)
+    {
+        var msg = $("#message").val();
+        msg = msg + " " + emoction + " ";
+        $("#message").val(msg);
+    }
     var prevMessage = "";
     var filename = "noti";
     var username = <?php echo '"' .$_COOKIE['name'] . '"'; ?>;
