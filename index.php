@@ -160,7 +160,6 @@ else
     setInterval(function() {$.get("log.html", function(data){
         if(data != prevMessage)
         {
-            console.log("new message");
             prevMessage = data;
             $("#sound").html('<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>');
         }
@@ -169,5 +168,8 @@ else
     setInterval(function() { $("#chat").scrollTop(1E10) }, 2500);
 
 </script>
+<div style="text-align: center; margin-top: 50px;" class="container well">
+    <a href="about.html">About This</a>
+</div>
 </body>
 </html>
