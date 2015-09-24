@@ -67,13 +67,16 @@ else
     <input type="button" class="btn btn-primary" value="Send" onclick="send()">
 </div>
 <a href="logout.php" style="margin-left: 45%;"><button class="btn btn-lg btn-primary">Logout</button></a>
+<div id="sound">
+
+</div>
 <script>
-    var message;
+    var prevMessage = "";
+    var filename = "noti";
     var username = <?php echo '"' .$_COOKIE['name'] . '"'; ?>;
     function send()
     {
         message = $("#message").val();
-        console.log(message);
         $("#message").val("");
         $.post("post.php", {message: message, name: username});
     }
@@ -81,8 +84,16 @@ else
     {
         $.get("log.html", function(data){$("#chat").html(data);});
     }
-    setInterval(function() {$.get("log.html", function(data){$("#chat").html(data);})}, 2500);
-    setInterval(function() { $("#chat").scrollTop(1E10) }, 2520);
+    setInterval(function() {$.get("log.html", function(data){
+        if(data != prevMessage)
+        {
+            console.log("new message");
+            prevMessage = data;
+            $("#sound").html('<audio autoplay="autoplay"><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>');
+        }
+        $("#chat").html(data);
+    })}, 2500);
+    setInterval(function() { $("#chat").scrollTop(1E10) }, 2500);
 
 </script>
 </body>
